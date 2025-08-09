@@ -3,8 +3,9 @@ import cors from 'cors';
 import express, { json, urlencoded } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
-import { ApiVersion, AppRoute } from './constants/app';
-import { config } from './constants/config';
+import { ApiVersion, AppRoute } from './lib/constants/app';
+import { config } from './lib/constants/config';
+import { errorMiddleware } from './middleware/errorMiddleware';
 import { v1 } from './routes/v1';
 
 export const createServer = () => {
@@ -22,6 +23,8 @@ export const createServer = () => {
   });
 
   app.use(ApiVersion.V1, v1);
+
+  app.use(errorMiddleware);
 
   return app;
 };

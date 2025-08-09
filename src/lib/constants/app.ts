@@ -13,3 +13,7 @@ export const AppRoute = {
   PUBLICATIONS: '/publications',
   COMMENTS: '/comments',
 } as const;
+
+export const AppParams = {
+  ID: '/:id',
+} as const;

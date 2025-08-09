@@ -11,6 +11,7 @@ declare global {
       BCRYPT_SALT_ROUNDS: number;
       NODE_ENV: string;
       PORT: number;
+      APP_DEBUG: string;
     }
   }
 

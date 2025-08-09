@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { config } from './constants/config';
+import { config } from './lib/constants/config';
 import { createServer } from './server';
 
 const server = createServer();
