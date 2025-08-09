@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { prisma } from '../../../db/prisma';
 import { AppRoute } from '../../../constants/app';
-import { CommentsService } from './comments.service';
+import { prisma } from '../../../db/prisma';
 import { CommentsController } from './comments.controller';
+import { CommentsService } from './comments.service';
 
 const comments = Router();
 

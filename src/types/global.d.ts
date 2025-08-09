@@ -10,6 +10,7 @@ declare global {
       JWT_ALGORITHM: string;
       BCRYPT_SALT_ROUNDS: number;
       NODE_ENV: string;
+      PORT: number;
     }
   }
 

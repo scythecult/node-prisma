@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { AppRoute } from '../../constants/app';
-import { users } from './users';
-import { publications } from './publications';
 import { comments } from './comments';
+import { publications } from './publications';
+import { users } from './users';
 
 const v1 = Router();
 

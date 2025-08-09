@@ -4,13 +4,12 @@ export const ApiVersion = {
 
 export const AppRoute = {
   ROOT: '/',
+  HEATH: '/health',
   USERS: '/users',
   PUBLICATIONS: '/publications',
   COMMENTS: '/comments',
 } as const;
 
-export const App = {
-  GATEWAY_PORT: 3000,
-} as const;
+export const SERVER_PORT = 3000;
 
 export const NODE_ENV = 'development';

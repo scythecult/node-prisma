@@ -1,31 +1,20 @@
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import express, { json, type Request, type Response, urlencoded } from 'express';
+import { type Request, type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import morgan from 'morgan';
-import { ApiVersion, App, AppRoute } from './constants/app';
+import { ApiVersion } from './constants/app';
+import { config } from './constants/config';
 import { v1 } from './routes/v1';
+import { createServer } from './server';
 
-const app = express();
+const server = createServer();
 
-app.use(cors());
-app.use(json());
-app.use(urlencoded());
-app.use(cookieParser());
-app.use(morgan('dev'));
+server.use(ApiVersion.V1, v1);
 
-app.get(AppRoute.ROOT, async (request: Request, response: Response) => {
-  response.status(StatusCodes.OK).json({ message: 'OK' });
-});
-
-app.use(ApiVersion.V1, v1);
-
-app.use('*not-found', (request: Request, response: Response) => {
+server.use('*not-found', (request: Request, response: Response) => {
   console.info('Not found', request.originalUrl);
 
   response.status(StatusCodes.NOT_FOUND).json({ message: 'Not found' });
 });
 
-app.listen(App.GATEWAY_PORT, () => {
-  console.info(`Server listening on port ${App.GATEWAY_PORT}`);
+server.listen(config.port, () => {
+  console.info(`Server listening on port ${config.port}`);
 });

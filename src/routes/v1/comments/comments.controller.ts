@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { CommentsService } from './comments.service';
+import type { CommentsService } from './comments.service';
 
 export class CommentsController {
   #commentsService: CommentsService;
