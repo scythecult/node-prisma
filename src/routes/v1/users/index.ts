@@ -11,6 +11,7 @@ const usersController = new UsersController(usersService);
 
 // users.use('AuthMiddleware')
 users.get(AppRoute.ROOT, usersController.listUsers);
+users.get('/:id', usersController.getUser);
 users.post(AppRoute.ROOT, usersController.createUser);
 
 export { users };

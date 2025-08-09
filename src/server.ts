@@ -3,8 +3,9 @@ import cors from 'cors';
 import express, { json, urlencoded } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
-import { AppRoute } from './constants/app';
+import { ApiVersion, AppRoute } from './constants/app';
 import { config } from './constants/config';
+import { v1 } from './routes/v1';
 
 export const createServer = () => {
   const app = express();
@@ -19,6 +20,8 @@ export const createServer = () => {
   app.get(AppRoute.HEATH, (request, response) => {
     response.status(StatusCodes.OK).json({ ok: true, environment: config.environment });
   });
+
+  app.use(ApiVersion.V1, v1);
 
   return app;
 };

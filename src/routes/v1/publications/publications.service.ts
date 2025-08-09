@@ -9,6 +9,10 @@ export class PublicationsService {
     return await this.#service.findMany({ include: { comments: true } });
   }
 
+  async getOneWithComments(id: number) {
+    return await this.#service.findUnique({ where: { id }, include: { comments: true } });
+  }
+
   async create(data: Prisma.PublicationCreateInput) {
     return await this.#service.create({ data });
   }

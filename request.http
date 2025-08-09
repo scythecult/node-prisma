@@ -6,15 +6,27 @@ content-type: application/json
 GET http://localhost:3000/v1/users HTTP/1.1
 content-type: application/json
 
+### GET User by id
+GET http://localhost:3000/v1/users/1 HTTP/1.1
+content-type: application/json
+
+### GET Publications
+GET http://localhost:3000/v1/publications HTTP/1.1
+content-type: application/json
+
+### GET Publication by id
+GET http://localhost:3000/v1/publications/1 HTTP/1.1
+content-type: application/json
+
+### GET Publication comments
+GET http://localhost:3000/v1/publications/1/comments HTTP/1.1
+content-type: application/json
+
 ### POST User
 POST http://localhost:3000/v1/users HTTP/1.1
 content-type: application/json
 
 {"username": "John Doe2", "email": "check@example.com", "password": "123456", "fullname": "John Doe", "birthdate": "2025-08-08T12:32:00+03:00", "avatarUrl": "http://example.com/picture/check.webp"}
-
-### GET Publications
-GET http://localhost:3000/v1/publications HTTP/1.1
-content-type: application/json
 
 ### POST Publication
 POST http://localhost:3000/v1/publications HTTP/1.1

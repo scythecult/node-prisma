@@ -14,6 +14,14 @@ export class UsersController {
     response.status(StatusCodes.OK).json(users);
   };
 
+  getUser = async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    const user = await this.usersService.getOne(+id);
+
+    response.status(StatusCodes.OK).json(user);
+  };
+
   createUser = async (request: Request, response: Response) => {
     const user = await this.usersService.create(request.body);
 

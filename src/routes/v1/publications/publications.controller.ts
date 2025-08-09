@@ -15,6 +15,14 @@ export class PublicationsController {
     response.status(StatusCodes.OK).json(publications);
   };
 
+  listPublicationComments = async (request: Request, response: Response) => {
+    const { id } = request.params;
+    // TODO Mb should change the method namig
+    const publication = await this.publicationsService.getOneWithComments(+id);
+
+    response.status(StatusCodes.OK).json(publication);
+  };
+
   createPublication = async (request: Request, response: Response) => {
     const publication = await this.publicationsService.create(request.body);
 
