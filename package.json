@@ -10,7 +10,7 @@
     "test:dev": "vitest",
     "prisma:generate": "prisma generate",
     "migration:create": "prisma migrate dev --create-only",
-    "migration:apply": "prisma migrate deploy && npm run prisma:generate",
+    "migration:apply": "prisma migrate deploy && prisma generate",
     "lint": "eslint"
   },
   "author": "Ale Scythecult Shov",

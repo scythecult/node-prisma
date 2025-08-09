@@ -1,20 +1,20 @@
 import type { Prisma } from '@prisma/client';
 
 export class UsersService {
-  #service;
-  constructor(service: Prisma.UserDelegate) {
-    this.#service = service;
+  #users;
+  constructor(users: Prisma.UserDelegate) {
+    this.#users = users;
   }
 
   async getAll() {
-    return await this.#service.findMany({ include: { publications: true } });
+    return await this.#users.findMany({ include: { publications: true } });
   }
 
   async getOne(id: number) {
-    return await this.#service.findUnique({ where: { id } });
+    return await this.#users.findUnique({ where: { id } });
   }
 
   async create(data: Prisma.UserCreateInput) {
-    return await this.#service.create({ data });
+    return await this.#users.create({ data });
   }
 }

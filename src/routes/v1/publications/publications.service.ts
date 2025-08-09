@@ -1,19 +1,26 @@
 import type { Prisma } from '@prisma/client';
-export class PublicationsService {
-  #service;
 
-  constructor(service: Prisma.PublicationDelegate) {
-    this.#service = service;
+export class PublicationsService {
+  #publications;
+  #commets;
+
+  constructor(publications: Prisma.PublicationDelegate, comments: Prisma.CommentDelegate) {
+    this.#publications = publications;
+    this.#commets = comments;
   }
   async getAll() {
-    return await this.#service.findMany({ include: { comments: true } });
+    return await this.#publications.findMany({ include: { comments: true } });
   }
 
-  async getOneWithComments(id: number) {
-    return await this.#service.findUnique({ where: { id }, include: { comments: true } });
+  async getOne(id: number) {
+    return await this.#publications.findUnique({ where: { id } });
+  }
+
+  async getPublicationComments(id: number) {
+    return await this.#commets.findMany({ where: { publicationId: id } });
   }
 
   async create(data: Prisma.PublicationCreateInput) {
-    return await this.#service.create({ data });
+    return await this.#publications.create({ data });
   }
 }

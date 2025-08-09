@@ -1,14 +1,14 @@
 import type { Prisma } from '@prisma/client';
 
 export class CommentsService {
-  #service;
-  constructor(service: Prisma.CommentDelegate) {
-    this.#service = service;
+  #comments;
+  constructor(comments: Prisma.CommentDelegate) {
+    this.#comments = comments;
   }
   async getAll() {
-    return await this.#service.findMany();
+    return await this.#comments.findMany();
   }
   async create(data: Prisma.CommentCreateInput) {
-    return await this.#service.create({ data });
+    return await this.#comments.create({ data });
   }
 }

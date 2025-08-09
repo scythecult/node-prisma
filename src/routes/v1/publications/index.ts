@@ -6,10 +6,11 @@ import { PublicationsService } from './publications.service';
 
 const publications = Router();
 
-const publicationsService = new PublicationsService(prisma.publication);
+const publicationsService = new PublicationsService(prisma.publication, prisma.comment);
 const publicationsController = new PublicationsController(publicationsService);
 
 publications.get(AppRoute.ROOT, publicationsController.listPublications);
+publications.get(AppParams.ID, publicationsController.getPublication);
 publications.get(`${AppParams.ID}${AppRoute.COMMENTS}`, publicationsController.listPublicationComments);
 publications.post(AppRoute.ROOT, publicationsController.createPublication);
 

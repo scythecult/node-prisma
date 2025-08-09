@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { EntityNotFound } from '../../../lib/errors/EntityNotFound';
 import type { PublicationsService } from './publications.service';
 
 export class PublicationsController {
@@ -12,13 +13,44 @@ export class PublicationsController {
   listPublications = async (request: Request, response: Response) => {
     const publications = await this.publicationsService.getAll();
 
+    if (!publications.length) {
+      throw new EntityNotFound({
+        statusCode: StatusCodes.NOT_FOUND,
+        message: 'No publications found',
+        code: 'ERR_NF',
+      });
+    }
+
     response.status(StatusCodes.OK).json(publications);
   };
 
   listPublicationComments = async (request: Request, response: Response) => {
     const { id } = request.params;
-    // TODO Mb should change the method namig
-    const publication = await this.publicationsService.getOneWithComments(+id);
+    const comments = await this.publicationsService.getPublicationComments(+id);
+
+    if (!comments.length) {
+      throw new EntityNotFound({
+        statusCode: StatusCodes.NOT_FOUND,
+        message: 'No comments found',
+        code: 'ERR_NF',
+      });
+    }
+
+    response.status(StatusCodes.OK).json(comments);
+  };
+
+  getPublication = async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    const publication = await this.publicationsService.getOne(+id);
+
+    if (!publication) {
+      throw new EntityNotFound({
+        statusCode: StatusCodes.NOT_FOUND,
+        message: 'No publication found',
+        code: 'ERR_NF',
+      });
+    }
 
     response.status(StatusCodes.OK).json(publication);
   };

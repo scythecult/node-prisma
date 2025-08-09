@@ -45,12 +45,6 @@ next-env.d.ts
 
 # specials
 /stored
-todo.md
+.todo.md
 .readme.md
-/generated/prisma
-
-/generated/prisma
-
-/generated/prisma
-
 /generated/prisma
