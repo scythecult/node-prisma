@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  username     String        @unique
+  password     String
+  fullname     String
+  birthdate    DateTime
+  note         Note?
+  avatarUrl    String
+  publications Publication[]
+  comments     Comment[]
+
+  userId          Int?
+  user            User?  @relation("SubscribedUsers", fields: [userId], references: [id])
+  subscribedUsers User[] @relation("SubscribedUsers")
+}
+
+model Note {
+  id       Int    @id @default(autoincrement())
+  message  String
+  auditory String
+  userId   Int    @unique
+  user     User?  @relation(fields: [userId], references: [id])
+}
+
+model Publication {
+  id          Int       @id @default(autoincrement())
+  pictureUrl  String
+  likes       Int       @default(0)
+  isLiked     Boolean   @default(false)
+  description String
+  comments    Comment[]
+  userId      Int
+  user        User?     @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id            Int          @id @default(autoincrement())
+  message       String
+  userId        Int
+  user          User?        @relation(fields: [userId], references: [id])
+  publicationId Int
+  publication   Publication? @relation(fields: [publicationId], references: [id])
+}
