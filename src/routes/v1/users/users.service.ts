@@ -10,7 +10,7 @@ export class UsersService {
     return await this.#users.findMany({ include: { publications: true } });
   }
 
-  async getOne(id: number) {
+  async getOne(id: string) {
     return await this.#users.findUnique({ where: { id } });
   }
 

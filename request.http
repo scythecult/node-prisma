@@ -7,7 +7,7 @@ GET http://localhost:3000/v1/users HTTP/1.1
 content-type: application/json
 
 ### GET User by id
-GET http://localhost:3000/v1/users/1 HTTP/1.1
+GET http://localhost:3000/v1/users/cme78s8qm0000i0et5pqmd7xc HTTP/1.1
 content-type: application/json
 
 ### GET Publications

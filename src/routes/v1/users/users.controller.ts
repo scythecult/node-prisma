@@ -26,7 +26,7 @@ export class UsersController {
   getUser = async (request: Request, response: Response) => {
     const { id } = request.params;
 
-    const user = await this.usersService.getOne(+id);
+    const user = await this.usersService.getOne(id);
 
     if (!user) {
       throw new EntityNotFound({

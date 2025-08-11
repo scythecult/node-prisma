@@ -12,12 +12,12 @@ export class PublicationsService {
     return await this.#publications.findMany({ include: { comments: true } });
   }
 
-  async getOne(id: number) {
+  async getOne(id: string) {
     return await this.#publications.findUnique({ where: { id } });
   }
 
-  async getPublicationComments(id: number) {
-    return await this.#commets.findMany({ where: { publicationId: id } });
+  async getPublicationComments(id: string) {
+    return await this.#commets.findMany({ where: { publication_id: id } });
   }
 
   async create(data: Prisma.PublicationCreateInput) {

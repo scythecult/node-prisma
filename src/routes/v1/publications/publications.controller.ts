@@ -26,7 +26,7 @@ export class PublicationsController {
 
   listPublicationComments = async (request: Request, response: Response) => {
     const { id } = request.params;
-    const comments = await this.publicationsService.getPublicationComments(+id);
+    const comments = await this.publicationsService.getPublicationComments(id);
 
     if (!comments.length) {
       throw new EntityNotFound({
@@ -42,7 +42,7 @@ export class PublicationsController {
   getPublication = async (request: Request, response: Response) => {
     const { id } = request.params;
 
-    const publication = await this.publicationsService.getOne(+id);
+    const publication = await this.publicationsService.getOne(id);
 
     if (!publication) {
       throw new EntityNotFound({

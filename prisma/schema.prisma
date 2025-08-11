@@ -8,46 +8,65 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  email        String        @unique
-  username     String        @unique
-  password     String
-  fullname     String
-  birthdate    DateTime
-  note         Note?
-  avatarUrl    String
-  publications Publication[]
-  comments     Comment[]
+  id               String        @id @default(cuid())
+  user_id          String?       @db.VarChar(36)
+  email            String        @unique
+  username         String        @unique
+  password         String
+  fullname         String
+  birthdate        DateTime      @db.DateTime()
+  avatar_url       String
+  created_at       DateTime      @default(now())
+  updated_at       DateTime      @updatedAt
+  note             Note?
+  publications     Publication[]
+  comments         Comment[]
+  user             User?         @relation("SubscribedUsers", fields: [user_id], references: [id])
+  subscribed_users User[]        @relation("SubscribedUsers")
 
-  userId          Int?
-  user            User?  @relation("SubscribedUsers", fields: [userId], references: [id])
-  subscribedUsers User[] @relation("SubscribedUsers")
+  @@index([user_id])
+  @@map("users")
 }
 
 model Note {
-  id       Int    @id @default(autoincrement())
-  message  String
-  auditory String
-  userId   Int    @unique
-  user     User?  @relation(fields: [userId], references: [id])
+  id         String   @id @default(cuid())
+  user_id    String   @unique @db.VarChar(36)
+  message    String   @db.Text
+  auditory   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       User?    @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@map("notes")
 }
 
 model Publication {
-  id          Int       @id @default(autoincrement())
-  pictureUrl  String
+  id          String    @id @default(cuid())
+  user_id     String    @db.VarChar(36)
+  picture_url String
   likes       Int       @default(0)
-  isLiked     Boolean   @default(false)
-  description String
+  is_liked    Boolean   @default(false)
+  description String    @db.Text
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
   comments    Comment[]
-  userId      Int
-  user        User?     @relation(fields: [userId], references: [id])
+  user        User?     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@map("publications")
 }
 
 model Comment {
-  id            Int          @id @default(autoincrement())
-  message       String
-  userId        Int
-  user          User?        @relation(fields: [userId], references: [id])
-  publicationId Int
-  publication   Publication? @relation(fields: [publicationId], references: [id])
+  id             String       @id @default(cuid())
+  user_id        String       @db.VarChar(36)
+  publication_id String       @db.VarChar(36)
+  message        String       @db.Text
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @updatedAt
+  user           User?        @relation(fields: [user_id], references: [id])
+  publication    Publication? @relation(fields: [publication_id], references: [id])
+
+  @@index([user_id])
+  @@map("comments")
 }
