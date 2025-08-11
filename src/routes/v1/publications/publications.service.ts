@@ -8,16 +8,16 @@ export class PublicationsService {
     this.#publications = publications;
     this.#commets = comments;
   }
-  async getAll() {
-    return await this.#publications.findMany({ include: { comments: true } });
+  async getAll(userId: string) {
+    return await this.#publications.findMany({ where: { user_id: userId }, include: { comments: true } });
   }
 
-  async getOne(id: string) {
-    return await this.#publications.findUnique({ where: { id } });
+  async getOne(id: string, userId: string) {
+    return await this.#publications.findUnique({ where: { id, user_id: userId }, include: { comments: true } });
   }
 
-  async getPublicationComments(id: string) {
-    return await this.#commets.findMany({ where: { publication_id: id } });
+  async getPublicationComments(id: string, userId: string) {
+    return await this.#commets.findMany({ where: { publication_id: id, user_id: userId } });
   }
 
   async create(data: Prisma.PublicationCreateInput) {

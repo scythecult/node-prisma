@@ -9,7 +9,7 @@
     "test:unit": "vitest run",
     "test:dev": "vitest",
     "prisma:generate": "prisma generate",
-    "migration:create": "prisma migrate dev --create-only",
+    "migration:create": "prisma migrate dev --create-only --skip-seed",
     "migration:apply": "prisma migrate deploy && prisma generate",
     "db:seed": "prisma db seed",
     "lint": "eslint"

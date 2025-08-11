@@ -16,11 +16,11 @@ declare global {
   }
 
   namespace Express {
-    /**
-     * Additional vendor fields in express.Request.
-     */
     interface Request {
-      user?: string | JwtPayload;
+      auth: {
+        payload: JwtPayload;
+        token: string;
+      };
     }
   }
 }

@@ -11,7 +11,7 @@ export class UsersService {
   }
 
   async getOne(id: string) {
-    return await this.#users.findUnique({ where: { id } });
+    return await this.#users.findUnique({ where: { id }, include: { publications: true } });
   }
 
   async create(data: Prisma.UserCreateInput) {
