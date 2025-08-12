@@ -43,6 +43,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# logging
+/logs
+
 # specials
 /stored
 .todo.md

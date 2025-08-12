@@ -12,6 +12,7 @@ declare global {
       NODE_ENV: string;
       PORT: number;
       APP_DEBUG: string;
+      LOG_LEVEL: error | warning | info | http | debug;
     }
   }
 

@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { EntityNotFound } from '../../../lib/errors/EntityNotFound';
+import { logger } from '../../../lib/utils/logger';
 import type { UsersService } from './users.service';
 
 export class UsersController {
@@ -10,6 +11,14 @@ export class UsersController {
   }
 
   listUsers = async (request: Request, response: Response) => {
+    // As a example, we are logging the user ID
+    logger.debug('Requesting users');
+    logger
+      .child({
+        logMetadata: `User ${request.auth.payload.id}`,
+      })
+      .debug('is requesting users');
+
     const users = await this.usersService.getAll();
 
     if (!users.length) {
