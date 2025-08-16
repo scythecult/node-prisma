@@ -10,12 +10,12 @@ const PUBLICATIONS_AMOUNT = 10;
 const COMMENTS_AMOUNT = 30;
 
 const main = async () => {
-  // Clear database tables to prevent multiple records
-  // await prisma.user.deleteMany();
-  // await prisma.publication.deleteMany();
-  // await prisma.comment.deleteMany();
+  // To delete multiple related data we need to add a cascade delete in the correspond model
+  await prisma.user.deleteMany();
+  await prisma.publication.deleteMany();
+  await prisma.comment.deleteMany();
 
-  for (let i = 0; i <= USERS_AMOUNT; i++) {
+  for (let i = 0; i < USERS_AMOUNT; i++) {
     const user = await prisma.user.create({
       data: {
         email: faker.internet.email(),
@@ -27,7 +27,7 @@ const main = async () => {
       },
     });
 
-    for (let j = 0; j <= PUBLICATIONS_AMOUNT; j++) {
+    for (let j = 0; j < PUBLICATIONS_AMOUNT; j++) {
       const publication = await prisma.publication.create({
         data: {
           user_id: user.id,
@@ -38,7 +38,7 @@ const main = async () => {
         },
       });
 
-      for (let k = 0; k <= COMMENTS_AMOUNT; k++) {
+      for (let k = 0; k < COMMENTS_AMOUNT; k++) {
         await prisma.comment.create({
           data: {
             user_id: user.id,

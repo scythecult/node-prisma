@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { AuthenticationError } from '../lib/errors/AuthenticationError';
-import { verifyJWT } from '../lib/utils/auth';
+import { AuthenticationError } from '@/lib/errors/AuthenticationError';
+import { verifyJWT } from '@/lib/utils/auth';
 
 export const authenticateUserMiddleware = async (request: Request, response: Response, next: NextFunction) => {
   const authHeader = request.headers.authorization;

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { prisma } from '../../../db/prisma';
-import { AppRoute } from '../../../lib/constants/app';
+import { prisma } from '@/db/prisma';
+import { AppRoute } from '@/lib/constants/app';
 import { CommentsController } from './comments.controller';
 import { CommentsService } from './comments.service';
 

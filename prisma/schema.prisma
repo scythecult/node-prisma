@@ -11,7 +11,7 @@ model User {
   id               String        @id @default(cuid())
   user_id          String?       @db.VarChar(36)
   email            String        @unique
-  username         String        @unique
+  username         String
   password         String
   fullname         String
   birthdate        DateTime      @db.DateTime()
@@ -34,8 +34,8 @@ model Note {
   message    String   @db.Text
   auditory   String
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  user       User?    @relation(fields: [user_id], references: [id])
+  updated_at DateTime @default(now()) @updatedAt
+  user       User?    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@map("notes")
@@ -49,9 +49,9 @@ model Publication {
   is_liked    Boolean   @default(false)
   description String    @db.Text
   created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
+  updated_at  DateTime  @default(now()) @updatedAt
   comments    Comment[]
-  user        User?     @relation(fields: [user_id], references: [id])
+  user        User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@map("publications")
@@ -63,9 +63,9 @@ model Comment {
   publication_id String       @db.VarChar(36)
   message        String       @db.Text
   created_at     DateTime     @default(now())
-  updated_at     DateTime     @updatedAt
-  user           User?        @relation(fields: [user_id], references: [id])
-  publication    Publication? @relation(fields: [publication_id], references: [id])
+  updated_at     DateTime     @default(now()) @updatedAt
+  user           User?        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  publication    Publication? @relation(fields: [publication_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@map("comments")

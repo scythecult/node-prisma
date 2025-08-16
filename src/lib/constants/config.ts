@@ -11,5 +11,5 @@ export const config = {
   jwtAudience: process.env.JWT_AUDIENCE ?? '',
   jwtExpirationTime: process.env.JWT_EXPIRATION_TIME ?? '',
   jwtIssuer: process.env.JWT_ISSUER ?? '',
-  jwtSecret: createSecretKey(process.env.JWT_SECRET, 'utf-8') ?? '',
+  jwtSecret: createSecretKey(process.env.JWT_SECRET, 'utf-8'),
 };

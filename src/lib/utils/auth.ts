@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
-import { type JWTPayload, jwtVerify, type JWTVerifyResult, SignJWT } from 'jose';
+import { jwtVerify, type JWTVerifyResult, SignJWT } from 'jose';
 import { config } from '../constants/config';
+import type { AuthPayload } from '../types/auth';
 
 export const createJWT = async (id: string) =>
   await new SignJWT({ id })
@@ -11,7 +12,7 @@ export const createJWT = async (id: string) =>
     .setExpirationTime(config.jwtExpirationTime)
     .sign(config.jwtSecret);
 
-export const verifyJWT = async <T extends JWTPayload>(token: string): Promise<JWTVerifyResult<T>> =>
+export const verifyJWT = async (token: string): Promise<JWTVerifyResult<AuthPayload>> =>
   await jwtVerify(token, config.jwtSecret, {
     issuer: config.jwtIssuer,
     audience: config.jwtAudience,
@@ -22,3 +23,5 @@ export const comparePasswords = async (plainPassword: string, hashedPassword: st
   await bcrypt.compare(plainPassword, hashedPassword);
 
 export const hashPassword = async (plainPassword: string) => await bcrypt.hash(plainPassword, config.bCryptSaltRounds);
+
+// console.log(await createJWT('cme9qjbrw0000i0dhbl852gg1'));

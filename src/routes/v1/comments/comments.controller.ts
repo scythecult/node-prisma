@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { EntityNotFound } from '../../../lib/errors/EntityNotFound';
+import { EntityNotFound } from '@/lib/errors/EntityNotFound';
 import type { CommentsService } from './comments.service';
 
 export class CommentsController {

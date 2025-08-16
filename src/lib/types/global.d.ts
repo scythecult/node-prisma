@@ -1,4 +1,4 @@
-import type { JwtPayload } from 'jsonwebtoken';
+import type { AuthPayload } from './auth';
 
 declare global {
   namespace NodeJS {
@@ -8,18 +8,18 @@ declare global {
       JWT_ISSUER: string;
       JWT_AUDIENCE: string;
       JWT_ALGORITHM: string;
-      BCRYPT_SALT_ROUNDS: number;
+      BCRYPT_SALT_ROUNDS: string;
       NODE_ENV: string;
-      PORT: number;
+      PORT: string;
       APP_DEBUG: string;
-      LOG_LEVEL: error | warning | info | http | debug;
+      LOG_LEVEL: string;
     }
   }
 
   namespace Express {
     interface Request {
       auth: {
-        payload: JwtPayload;
+        payload: AuthPayload;
         token: string;
       };
     }

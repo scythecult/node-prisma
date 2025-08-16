@@ -5,34 +5,46 @@ content-type: application/json
 ### GET All Users
 GET http://localhost:3000/v1/users HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTc4czhxbTAwMDBpMGV0NXBxbWQ3eGMiLCJpYXQiOjE3NTUwMDY4NjIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUwMTA0NjJ9.4opNeUfAaCNgWqiuDFpGmx88DjRzaew5goHPFvTaaxc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
 
 ### GET User by id
-GET http://localhost:3000/v1/users/cme78s8qm0000i0et5pqmd7xc HTTP/1.1
+GET http://localhost:3000/v1/users/ HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTc4czhxbTAwMDBpMGV0NXBxbWQ3eGMiLCJpYXQiOjE3NTUwMDY4NjIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUwMTA0NjJ9.4opNeUfAaCNgWqiuDFpGmx88DjRzaew5goHPFvTaaxc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
 
 ### GET Publications
 GET http://localhost:3000/v1/publications HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTc4czhxbTAwMDBpMGV0NXBxbWQ3eGMiLCJpYXQiOjE3NTUwMDY4NjIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUwMTA0NjJ9.4opNeUfAaCNgWqiuDFpGmx88DjRzaew5goHPFvTaaxc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
 
 ### GET Publication by id
 GET http://localhost:3000/v1/publications/cme798has01mti07mvx3jtyod HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTc4czhxbTAwMDBpMGV0NXBxbWQ3eGMiLCJpYXQiOjE3NTUwMDY4NjIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUwMTA0NjJ9.4opNeUfAaCNgWqiuDFpGmx88DjRzaew5goHPFvTaaxc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
 
 ### GET Publication comments
 GET http://localhost:3000/v1/publications/cme798has01mti07mvx3jtyod/comments HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTc4czhxbTAwMDBpMGV0NXBxbWQ3eGMiLCJpYXQiOjE3NTUwMDY4NjIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUwMTA0NjJ9.4opNeUfAaCNgWqiuDFpGmx88DjRzaew5goHPFvTaaxc
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
 
 ### POST User
 POST http://localhost:3000/v1/users HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
 
-{"username": "John Doe2", "email": "check@example.com", "password": "123456", "fullname": "John Doe", "birthdate": "2025-08-08T12:32:00+03:00", "avatarUrl": "http://example.com/picture/check.webp"}
+{ "username": "Validation User1231", "email": "v6M2F@example.com", "password": "123456", "fullname": "Validation", "birthdate": "2023-10-27T10:00:00Z", "avatar_url": "http://example.com/picture/check.webp"}
+
+### PUT User
+PUT http://localhost:3000/v1/users/cme9qjbrw0000i0dhbl852gg1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
+
+{ "avatar_url": "http://example.com/picture/zaebis.webp", "username": "lol kek"}
+
+### DELETE User
+DELETE http://localhost:3000/v1/users/cmee3355b0000i07owzd2pqly HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTUzMzY4NjYsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTUzNDA0NjZ9.ggkqE-HeZkwBO5JDj9E2SkveSc-16_INgHV6Wryw7g0
+content-type: application/json
 
 ### POST Publication
 POST http://localhost:3000/v1/publications HTTP/1.1

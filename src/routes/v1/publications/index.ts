@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { prisma } from '../../../db/prisma';
-import { AppParams, AppRoute } from '../../../lib/constants/app';
-import { authenticateUserMiddleware } from '../../../middleware/authenticateUserMiddleware';
+import { prisma } from '@/db/prisma';
+import { AppParams, AppRoute } from '@/lib/constants/app';
+import { authenticateUserMiddleware } from '@/middleware/authenticateUserMiddleware';
 import { PublicationsController } from './publications.controller';
 import { PublicationsService } from './publications.service';
 

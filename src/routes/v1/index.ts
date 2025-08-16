@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { AppRoute } from '../../lib/constants/app';
+import { AppRoute } from '@/lib/constants/app';
 import { comments } from './comments';
 import { publications } from './publications';
 import { users } from './users';

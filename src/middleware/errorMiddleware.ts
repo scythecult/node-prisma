@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ZodError } from 'zod';
 import { config } from '../lib/constants/config';
 import { CustomError } from '../lib/errors/CustomError';
 import { getErrorMessage } from '../lib/utils/utils';
@@ -13,6 +14,16 @@ export const errorMiddleware = (error: unknown, request: Request, response: Resp
 
   if (error instanceof CustomError) {
     response.status(error.statusCode).json({ error: { message: error.message, code: error.code } });
+
+    return;
+  }
+
+  if (error instanceof ZodError) {
+    const errorMessages = error.issues.map((issue) => issue.message);
+
+    response
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ error: { message: 'Validation error', errors: errorMessages, code: 'ERR_VALID' } });
 
     return;
   }

@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { EntityNotFound } from '../../../lib/errors/EntityNotFound';
+import { EntityNotFound } from '@/lib/errors/EntityNotFound';
 import type { PublicationsService } from './publications.service';
 
 export class PublicationsController {
@@ -25,8 +25,7 @@ export class PublicationsController {
   };
 
   listPublicationComments = async (request: Request, response: Response) => {
-    const { id } = request.params;
-    const comments = await this.publicationsService.getPublicationComments(id, request.auth.payload.id);
+    const comments = await this.publicationsService.getPublicationComments(request.params.id, request.auth.payload.id);
 
     if (!comments.length) {
       throw new EntityNotFound({
@@ -40,9 +39,7 @@ export class PublicationsController {
   };
 
   getPublication = async (request: Request, response: Response) => {
-    const { id } = request.params;
-
-    const publication = await this.publicationsService.getOne(id, request.auth.payload.id);
+    const publication = await this.publicationsService.getOne(request.params.id, request.auth.payload.id);
 
     if (!publication) {
       throw new EntityNotFound({
