@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*", "src/tests/**/*"],
   "exclude": ["node_modules", "dist"],
 
   "compilerOptions": {
@@ -26,7 +26,7 @@
     "paths": {
       "@/storybook/*": [".storybook/*"],
       "@/mocks/*": ["mocks/*"],
-      "@/tests/*": ["tests/*"],
+      "@/tests/*": ["src/tests/*"],
       "@/*": ["src/*"],
       "@lib/*": ["src/lib/*"],
       "resources/*": ["resources/*"]
