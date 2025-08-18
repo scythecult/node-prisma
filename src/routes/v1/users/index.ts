@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '@/db/prisma';
-import { idParamSchema } from '@/db/schemas/request';
+import { paramIdSchema, queryPaginationSchema } from '@/db/schemas/request';
 import { createUserSchema, updateUserSchema } from '@/db/schemas/user';
 import { AppParams, AppRoute } from '@/lib/constants/app';
 import { authenticateUserMiddleware } from '@/middleware/authenticateUserMiddleware';
@@ -14,14 +14,14 @@ const usersService = new UsersService(prisma.user);
 const usersController = new UsersController(usersService);
 
 users.use(authenticateUserMiddleware);
-users.get(AppRoute.ROOT, usersController.listUsers);
-users.get(AppParams.ID, validationMiddlewareBuilder({ params: idParamSchema }), usersController.getUser);
+users.get(AppRoute.ROOT, validationMiddlewareBuilder({ query: queryPaginationSchema }), usersController.listUsers);
+users.get(AppParams.ID, validationMiddlewareBuilder({ params: paramIdSchema }), usersController.getUser);
 users.post(AppRoute.ROOT, validationMiddlewareBuilder({ body: createUserSchema }), usersController.createUser);
 users.put(
   AppParams.ID,
-  validationMiddlewareBuilder({ params: idParamSchema, body: updateUserSchema }),
+  validationMiddlewareBuilder({ params: paramIdSchema, body: updateUserSchema }),
   usersController.updateUser,
 );
-users.delete(AppParams.ID, validationMiddlewareBuilder({ params: idParamSchema }), usersController.deleteUser);
+users.delete(AppParams.ID, validationMiddlewareBuilder({ params: paramIdSchema }), usersController.deleteUser);
 
 export { users };
