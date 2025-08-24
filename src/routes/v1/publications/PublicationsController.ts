@@ -1,14 +1,16 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { BaseController } from '@/lib/controller/BaseController';
-import type { PublicationsService } from './publications.service';
+import type { PublicationUseCase } from '@/lib/types/useCase';
+import type { PublicationService } from '../../../lib/services/publication/PublicationService';
 
 export class PublicationsController extends BaseController {
   #service;
-
-  constructor(service: PublicationsService) {
+  #useCase;
+  constructor(service: PublicationService, useCase: PublicationUseCase) {
     super();
     this.#service = service;
+    this.#useCase = useCase;
   }
 
   listPublications = async (request: Request, response: Response) => {
@@ -30,7 +32,7 @@ export class PublicationsController extends BaseController {
   };
 
   createPublication = async (request: Request, response: Response) => {
-    const publication = await this.#service.create(request.body);
+    const publication = await this.#useCase.createPublication.execute(request);
 
     response.status(StatusCodes.CREATED).json(publication);
   };

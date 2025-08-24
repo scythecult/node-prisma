@@ -1,14 +1,17 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { BaseController } from '@/lib/controller/BaseController';
+import type { UserService } from '@/lib/services/user/UserService';
+import type { UserUseCase } from '@/lib/types/useCase';
 import { logger } from '@/lib/utils/logger';
-import type { UsersService } from './users.service';
 
 export class UsersController extends BaseController {
   #service;
-  constructor(service: UsersService) {
+  #useCase;
+  constructor(service: UserService, useCase: UserUseCase) {
     super();
     this.#service = service;
+    this.#useCase = useCase;
   }
 
   listUsers = async (request: Request, response: Response) => {
@@ -36,13 +39,9 @@ export class UsersController extends BaseController {
   };
 
   createUser = async (request: Request, response: Response) => {
-    const { email } = request.body;
+    const user = await this.#useCase.createUser.execute(request);
 
-    await this.#service.getOneByEmail(email);
-
-    const newUser = await this.#service.create(request.body);
-
-    response.status(StatusCodes.CREATED).json(newUser);
+    response.status(StatusCodes.CREATED).json(user);
   };
 
   updateUser = async (request: Request, response: Response) => {
@@ -52,7 +51,7 @@ export class UsersController extends BaseController {
   };
 
   deleteUser = async (request: Request, response: Response) => {
-    await this.#service.delete(request.params.id);
+    await this.#useCase.deleteUser.execute(request);
 
     response.status(StatusCodes.OK).json({ deleted: true });
   };

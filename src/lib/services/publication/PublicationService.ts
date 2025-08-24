@@ -1,17 +1,18 @@
-import type { Prisma } from '@prisma/client';
+import type { Prisma, PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import { EntityNotFound } from '@/lib/errors/EntityNotFound';
 
-export class PublicationsService {
-  #publications;
-  #commets;
+export class PublicationService {
+  #db;
 
-  constructor(publications: Prisma.PublicationDelegate, comments: Prisma.CommentDelegate) {
-    this.#publications = publications;
-    this.#commets = comments;
+  constructor(db: PrismaClient) {
+    this.#db = db;
   }
   async getAll(userId: string) {
-    const publications = await this.#publications.findMany({ where: { user_id: userId }, include: { comments: true } });
+    const publications = await this.#db.publication.findMany({
+      where: { user_id: userId },
+      include: { comments: true },
+    });
 
     if (!publications.length) {
       throw new EntityNotFound({
@@ -25,7 +26,7 @@ export class PublicationsService {
   }
 
   async getPublicationComments(id: string, userId: string) {
-    const comments = await this.#commets.findMany({ where: { publication_id: id, user_id: userId } });
+    const comments = await this.#db.comment.findMany({ where: { publication_id: id, user_id: userId } });
 
     if (!comments.length) {
       throw new EntityNotFound({
@@ -39,7 +40,7 @@ export class PublicationsService {
   }
 
   async getOne(id: string, userId: string) {
-    const publication = await this.#publications.findUnique({
+    const publication = await this.#db.publication.findUnique({
       where: { id, user_id: userId },
       include: { comments: true },
     });
@@ -56,6 +57,6 @@ export class PublicationsService {
   }
 
   async create(data: Prisma.PublicationCreateInput) {
-    return await this.#publications.create({ data });
+    return await this.#db.publication.create({ data });
   }
 }

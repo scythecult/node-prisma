@@ -12,4 +12,13 @@ export const config = {
   jwtExpirationTime: process.env.JWT_EXPIRATION_TIME ?? '',
   jwtIssuer: process.env.JWT_ISSUER ?? '',
   jwtSecret: createSecretKey(process.env.JWT_SECRET, 'utf-8'),
+  mail: {
+    mailer: process.env.MAIL_MAILER ?? 'smtp',
+    host: process.env.MAIL_HOST ?? '',
+    port: process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 0,
+    username: process.env.MAIL_USERNAME ?? '',
+    password: process.env.MAIL_PASSWORD ?? '',
+  },
+  adminEmail: process.env.ADMIN_EMAIL ?? '',
+  consoleLogEmails: process.env.CONSOLE_LOG_EMAILS === 'true',
 };

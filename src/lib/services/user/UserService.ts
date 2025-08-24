@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client';
+import type { Prisma, PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import { EntityNotFound } from '@/lib/errors/EntityNotFound';
 
@@ -7,10 +7,10 @@ type GetAllOptions = {
   offset: number;
 };
 
-export class UsersService {
-  #users;
-  constructor(users: Prisma.UserDelegate) {
-    this.#users = users;
+export class UserService {
+  #db;
+  constructor(db: PrismaClient) {
+    this.#db = db;
   }
 
   mapUser(user: Prisma.UserGetPayload<{ include: { publications: true } }>) {
@@ -29,7 +29,7 @@ export class UsersService {
 
   async getAll(options: GetAllOptions) {
     const { limit, offset } = options;
-    const users = await this.#users.findMany({
+    const users = await this.#db.user.findMany({
       take: limit,
       skip: offset,
       include: { publications: true, subscribed_users: true },
@@ -47,7 +47,7 @@ export class UsersService {
   }
 
   async getOne(id: string) {
-    const user = await this.#users.findUnique({ where: { id }, include: { publications: true } });
+    const user = await this.#db.user.findUnique({ where: { id }, include: { publications: true } });
 
     if (!user) {
       throw new EntityNotFound({
@@ -61,7 +61,7 @@ export class UsersService {
   }
 
   async getOneByEmail(email: string) {
-    const user = await this.#users.findUnique({ where: { email }, include: { publications: true } });
+    const user = await this.#db.user.findUnique({ where: { email } });
 
     if (user) {
       throw new EntityNotFound({
@@ -75,11 +75,13 @@ export class UsersService {
   }
 
   async create(data: Prisma.UserCreateInput) {
-    return await this.#users.create({ data });
+    await this.getOneByEmail(data.email);
+
+    return await this.#db.user.create({ data });
   }
 
   async update(id: string, data: Prisma.UserUpdateInput) {
-    return await this.#users.update({ where: { id }, data });
+    return await this.#db.user.update({ where: { id }, data });
   }
 
   async delete(id: string) {
@@ -93,6 +95,6 @@ export class UsersService {
       });
     }
 
-    return await this.#users.delete({ where: { id } });
+    return await this.#db.user.delete({ where: { id } });
   }
 }

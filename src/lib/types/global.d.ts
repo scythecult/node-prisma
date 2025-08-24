@@ -13,6 +13,13 @@ declare global {
       PORT: string;
       APP_DEBUG: string;
       LOG_LEVEL: string;
+      MAIL_MAILER: string;
+      MAIL_HOST: string;
+      MAIL_PORT: string;
+      MAIL_USERNAME: string;
+      MAIL_PASSWORD: string;
+      ADMIN_EMAIL: string;
+      CONSOLE_LOG_EMAILS: string;
     }
   }
 

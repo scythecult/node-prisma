@@ -5,52 +5,53 @@ content-type: application/json
 ### GET All Users
 GET http://localhost:3000/v1/users?limit=2&offset=0 HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
 ### GET User by id
 GET http://localhost:3000/v1/users/cme9qjc1201fri0dh5kzsrihj HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
 ### GET Publications
 GET http://localhost:3000/v1/publications HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
 ### GET Publication by id
 GET http://localhost:3000/v1/publications/cme9qjbto006yi0dhitxivxyd HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
 ### GET Publication comments
 GET http://localhost:3000/v1/publications/cme9qjbto006yi0dhitxivxyd/comments HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
 ### POST User
 POST http://localhost:3000/v1/users HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
-{ "username": "Validation User1231", "email": "v6M2F@example.com", "password": "123456", "fullname": "Validation", "birthdate": "2023-10-27T10:00:00Z", "avatar_url": "http://example.com/picture/check.webp"}
+{ "username": "HEX check console", "email": "console100500@check.com", "password": "123456", "fullname": "Validation", "birthdate": "2023-10-27T10:00:00Z", "avatar_url": "http://example.com/picture/check.webp"}
 
 ### PUT User
 PUT http://localhost:3000/v1/users/cme9qjbrw0000i0dhbl852gg1 HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
 { "avatar_url": "http://example.com/picture/zaebis.webp", "username": "lol kek"}
 
 ### DELETE User
-DELETE http://localhost:3000/v1/users/cmeftukx00000i0ma04buma1j HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU0NDMxNDIsImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTU0NDY3NDJ9.zhVua750bic7KTnHijRWpFaMu2z20GkhSVsvCgLj5Mk
+DELETE http://localhost:3000/v1/users/cmek1rha40000i0u89s1swobu HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 content-type: application/json
 
 ### POST Publication
 POST http://localhost:3000/v1/publications HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtZTlxamJydzAwMDBpMGRoYmw4NTJnZzEiLCJpYXQiOjE3NTU1MjgyMDksImlzcyI6InNlcnZlciIsImF1ZCI6InVzZXIiLCJleHAiOjE3NTYxMzMwMDl9.imR3N_ePch29oQ_wlBeL7y4uIAP9oKREx2NmRGngjEk
 
-{"pictureUrl": "http://example.com/picture/check.webp", "userId": 1, "likes": 10, "description": "Hello world100500"}
+{"picture_url": "http://example.com/picture/check.webp", "user_id": "cme9qjbrw0000i0dhbl852gg1","is_liked": true, "likes": 100500, "description": "Hello world100500"}
 
 ### POST Comment
 POST http://localhost:3000/v1/comments HTTP/1.1
