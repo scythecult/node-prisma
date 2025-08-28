@@ -34,8 +34,8 @@ model Note {
   message    String   @db.Text
   auditory   String
   created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
-  user       User?    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  updated_at DateTime @updatedAt
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
   @@map("notes")
@@ -49,7 +49,7 @@ model Publication {
   is_liked    Boolean   @default(false)
   description String    @db.Text
   created_at  DateTime  @default(now())
-  updated_at  DateTime  @default(now()) @updatedAt
+  updated_at  DateTime  @updatedAt
   comments    Comment[]
   user        User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
@@ -63,7 +63,7 @@ model Comment {
   publication_id String       @db.VarChar(36)
   message        String       @db.Text
   created_at     DateTime     @default(now())
-  updated_at     DateTime     @default(now()) @updatedAt
+  updated_at     DateTime     @updatedAt
   user           User?        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   publication    Publication? @relation(fields: [publication_id], references: [id], onDelete: Cascade)
 

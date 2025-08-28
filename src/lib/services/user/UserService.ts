@@ -1,11 +1,13 @@
-import type { Prisma, PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
+import type { INote } from '@/db/types/Note';
+import type { IPublication } from '@/db/types/Publication';
+import type { IUser } from '@/db/types/User';
+import { User } from '@/lib/entities/User';
 import { EntityNotFound } from '@/lib/errors/EntityNotFound';
+import type { QueryLimit } from '@/lib/types/request';
 
-type GetAllOptions = {
-  limit: number;
-  offset: number;
-};
+type MapUserProps = IUser & { publications: IPublication[] };
 
 export class UserService {
   #db;
@@ -13,7 +15,7 @@ export class UserService {
     this.#db = db;
   }
 
-  mapUser(user: Prisma.UserGetPayload<{ include: { publications: true } }>) {
+  mapUser(user: MapUserProps) {
     return {
       id: user.id,
       user_id: user.user_id,
@@ -27,12 +29,13 @@ export class UserService {
     };
   }
 
-  async getAll(options: GetAllOptions) {
+  async getAll(options: QueryLimit) {
     const { limit, offset } = options;
     const users = await this.#db.user.findMany({
       take: limit,
       skip: offset,
       include: { publications: true, subscribed_users: true },
+      omit: { password: true },
     });
 
     if (!users.length) {
@@ -47,7 +50,11 @@ export class UserService {
   }
 
   async getOne(id: string) {
-    const user = await this.#db.user.findUnique({ where: { id }, include: { publications: true } });
+    const user = await this.#db.user.findUnique({
+      where: { id },
+      include: { publications: true, note: true },
+      omit: { password: true },
+    });
 
     if (!user) {
       throw new EntityNotFound({
@@ -61,7 +68,7 @@ export class UserService {
   }
 
   async getOneByEmail(email: string) {
-    const user = await this.#db.user.findUnique({ where: { email } });
+    const user = await this.#db.user.findUnique({ where: { email }, omit: { password: true } });
 
     if (user) {
       throw new EntityNotFound({
@@ -74,26 +81,34 @@ export class UserService {
     return user;
   }
 
-  async create(data: Prisma.UserCreateInput) {
-    await this.getOneByEmail(data.email);
+  async create(data: IUser) {
+    const user = new User(data);
 
-    return await this.#db.user.create({ data });
+    await this.getOneByEmail(user.email);
+
+    await user.hashPassword();
+
+    return await this.#db.user.create({ data: user.getAsDto(), omit: { password: true } });
   }
 
-  async update(id: string, data: Prisma.UserUpdateInput) {
-    return await this.#db.user.update({ where: { id }, data });
+  async update(id: string, data: IUser) {
+    return await this.#db.user.update({ where: { id }, data, omit: { password: true } });
+  }
+
+  async updateNote(id: string, data: INote) {
+    let note = await this.#db.note.findUnique({ where: { user_id: id } });
+
+    if (!note) {
+      note = await this.#db.note.create({ data: { ...data, user_id: id } });
+    } else {
+      note = await this.#db.note.update({ where: { user_id: id }, data });
+    }
+
+    return note;
   }
 
   async delete(id: string) {
-    const user = await this.getOne(id);
-
-    if (!user) {
-      throw new EntityNotFound({
-        statusCode: StatusCodes.NOT_FOUND,
-        message: 'No user found',
-        code: 'ERR_NF',
-      });
-    }
+    await this.getOne(id);
 
     return await this.#db.user.delete({ where: { id } });
   }

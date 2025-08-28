@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 import type SMTPTransport from 'nodemailer/lib/smtp-transport';
-import { config } from '@/lib/constants/config';
-import type { Mailer, MailNotification } from '@/lib/types/ports';
+import { config } from '@/config';
+import type { IMailer, IMailNotification } from '@/lib/types/ports';
 
-export class MailtrapMailer implements Mailer {
+export class MailtrapMailer implements IMailer {
   protected transporter;
 
   constructor() {
@@ -19,7 +19,7 @@ export class MailtrapMailer implements Mailer {
     this.transporter = nodemailer.createTransport(options);
   }
 
-  async send(mailNotification: MailNotification): Promise<void> {
+  async send(mailNotification: IMailNotification): Promise<void> {
     await this.transporter.sendMail({
       from: '"Photorama" <notifications@photorama.com>',
       to: mailNotification.to,

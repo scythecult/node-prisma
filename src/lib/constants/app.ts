@@ -12,6 +12,8 @@ export const AppRoute = {
   USERS: '/users',
   PUBLICATIONS: '/publications',
   COMMENTS: '/comments',
+  LIKE: '/like',
+  NOTE: '/note',
 } as const;
 
 export const AppParams = {

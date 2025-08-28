@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { jwtVerify, type JWTVerifyResult, SignJWT } from 'jose';
-import { config } from '../constants/config';
+import { config } from '../../config';
 import type { AuthPayload } from '../types/auth';
 
 export const createJWT = async (id: string) =>

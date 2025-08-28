@@ -1,7 +1,7 @@
-import type { Mailer, MailNotification } from '@/lib/types/ports';
+import type { IMailer, IMailNotification } from '@/lib/types/ports';
 
-export class ConsoleLogMailer implements Mailer {
-  public async send(mailNotification: MailNotification): Promise<void> {
+export class ConsoleLogMailer implements IMailer {
+  public async send(mailNotification: IMailNotification): Promise<void> {
     console.info(mailNotification.text);
   }
 }

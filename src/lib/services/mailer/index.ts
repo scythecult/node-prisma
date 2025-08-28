@@ -1,9 +1,9 @@
-import { config } from '@/lib/constants/config';
-import type { Mailer } from '@/lib/types/ports';
+import { config } from '@/config';
+import type { IMailer } from '@/lib/types/ports';
 import { consoleLogMailer } from './console-log-mailer';
 import { mailtrapMailer } from './mailtrap-mailer';
 
-let mailer: Mailer = mailtrapMailer;
+let mailer: IMailer = mailtrapMailer;
 
 // Strategy pattern
 if (config.consoleLogEmails) {

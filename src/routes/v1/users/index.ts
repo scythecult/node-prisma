@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { paramIdSchema, queryPaginationSchema } from '@/db/schemas/request';
-import { createUserSchema, updateUserSchema } from '@/db/schemas/user';
+import { createUserSchema, noteSchema, updateUserSchema } from '@/db/schemas/user';
 import { AppParams, AppRoute } from '@/lib/constants/app';
 import { mailer } from '@/lib/services/mailer';
 import { userService } from '@/lib/services/user';
@@ -24,6 +24,11 @@ users.put(
   AppParams.ID,
   validationMiddlewareBuilder({ params: paramIdSchema, body: updateUserSchema }),
   usersController.updateUser,
+);
+users.post(
+  `${AppParams.ID}${AppRoute.NOTE}`,
+  validationMiddlewareBuilder({ params: paramIdSchema, body: noteSchema }),
+  usersController.updateNote,
 );
 users.delete(AppParams.ID, validationMiddlewareBuilder({ params: paramIdSchema }), usersController.deleteUser);
 

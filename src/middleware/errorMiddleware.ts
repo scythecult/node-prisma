@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ZodError } from 'zod';
-import { config } from '../lib/constants/config';
+import { config } from '../config';
 import { CustomError } from '../lib/errors/CustomError';
 import { getErrorMessage } from '../lib/utils/utils';
 

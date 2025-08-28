@@ -3,7 +3,7 @@ import cors from 'cors';
 import express, { json, urlencoded } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ApiVersion, AppRoute } from './lib/constants/app';
-import { config } from './lib/constants/config';
+import { config } from './config';
 import { errorMiddleware } from './middleware/errorMiddleware';
 import { loggerMiddleware } from './middleware/loggerMiddleware';
 import { v1 } from './routes/v1';

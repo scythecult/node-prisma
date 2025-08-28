@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { BaseController } from '@/lib/controller/BaseController';
 import type { UserService } from '@/lib/services/user/UserService';
 import type { UserUseCase } from '@/lib/types/useCase';
+import { BaseController } from '@/lib/utils/BaseController';
 import { logger } from '@/lib/utils/logger';
 
 export class UsersController extends BaseController {
@@ -46,6 +46,12 @@ export class UsersController extends BaseController {
 
   updateUser = async (request: Request, response: Response) => {
     const user = await this.#service.update(request.params.id, request.body);
+
+    response.status(StatusCodes.OK).json(user);
+  };
+
+  updateNote = async (request: Request, response: Response) => {
+    const user = await this.#service.updateNote(request.params.id, request.body);
 
     response.status(StatusCodes.OK).json(user);
   };

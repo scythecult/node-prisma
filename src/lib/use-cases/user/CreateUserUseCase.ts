@@ -1,10 +1,10 @@
 import type { Request } from 'express';
 import type { UserService } from '../../services/user/UserService';
-import type { Mailer } from '../../types/ports';
+import type { IMailer } from '../../types/ports';
 import { logger } from '../../utils/logger';
 
 export class CreateUserUseCase {
-  constructor(protected usersService: UserService, protected mailer: Mailer) {}
+  constructor(protected usersService: UserService, protected mailer: IMailer) {}
 
   async execute(request: Request) {
     const user = await this.usersService.create(request.body);

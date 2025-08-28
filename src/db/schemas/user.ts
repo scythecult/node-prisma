@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const noteSchema = z.strictObject({
-  user_id: z.uuid({ error: 'User ID must be a valid UUID' }),
+  // user_id: z.string({ error: 'User ID must be a valid UUID' }),
   message: z
     .string({ error: 'Message must be a string' })
     .min(1, { error: 'Message must be minimum 1 character' })
@@ -10,8 +10,6 @@ export const noteSchema = z.strictObject({
     }),
   auditory: z.literal(['friends', 'subscribed'], { error: 'Auditory must be "friends" or "subscribed"' }),
 });
-
-export type NoteBody = z.infer<typeof noteSchema>;
 
 export const createUserSchema = z.strictObject({
   email: z.email({ error: 'Email must be a valid email address' }),
@@ -26,8 +24,4 @@ export const createUserSchema = z.strictObject({
   note: noteSchema.optional(),
 });
 
-export type CreateUserBody = z.infer<typeof createUserSchema>;
-
 export const updateUserSchema = createUserSchema.partial().optional();
-
-export type UpdateUserBody = z.infer<typeof updateUserSchema>;

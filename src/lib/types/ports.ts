@@ -1,10 +1,10 @@
-export interface MailNotification {
+export interface IMailNotification {
   to: string;
   subject: string;
   text: string;
   html?: string;
 }
 
-export interface Mailer {
-  send: (notification: MailNotification) => Promise<void>;
+export interface IMailer {
+  send: (notification: IMailNotification) => Promise<void>;
 }

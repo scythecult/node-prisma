@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { BaseController } from '@/lib/controller/BaseController';
 import type { PublicationUseCase } from '@/lib/types/useCase';
+import { BaseController } from '@/lib/utils/BaseController';
 import type { PublicationService } from '../../../lib/services/publication/PublicationService';
 
 export class PublicationsController extends BaseController {
@@ -14,7 +14,10 @@ export class PublicationsController extends BaseController {
   }
 
   listPublications = async (request: Request, response: Response) => {
-    const publications = await this.#service.getAll(request.auth.payload.id);
+    const limit = Number(request.query.limit) || this.defaultLimit;
+    const offset = Number(request.query.offset) || this.defaultOffset;
+
+    const publications = await this.#service.getAll(request.auth.payload.id, { limit, offset });
 
     response.status(StatusCodes.OK).json(publications);
   };
@@ -35,5 +38,11 @@ export class PublicationsController extends BaseController {
     const publication = await this.#useCase.createPublication.execute(request);
 
     response.status(StatusCodes.CREATED).json(publication);
+  };
+
+  updateLikeCount = async (request: Request, response: Response) => {
+    const publication = await this.#service.updateLikeCount(request.params.id, request.auth.payload.id);
+
+    response.status(StatusCodes.OK).json(publication);
   };
 }

@@ -1,5 +1,5 @@
 import { createSecretKey } from 'node:crypto';
-import { NODE_ENV, SERVER_PORT } from './app';
+import { NODE_ENV, SERVER_PORT } from './lib/constants/app';
 
 export const config = {
   environment: process.env.NODE_ENV ?? NODE_ENV,

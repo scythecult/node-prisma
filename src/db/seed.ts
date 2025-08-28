@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
+import { hashPassword } from '@/lib/utils/auth';
 
 const prisma = new PrismaClient();
 
@@ -7,7 +8,7 @@ const USERS_AMOUNT = 4;
 
 const PUBLICATIONS_AMOUNT = 10;
 
-const COMMENTS_AMOUNT = 30;
+const COMMENTS_AMOUNT = 10;
 
 const main = async () => {
   // To delete multiple related data we need to add a cascade delete in the correspond model
@@ -20,7 +21,7 @@ const main = async () => {
       data: {
         email: faker.internet.email(),
         username: faker.internet.username(),
-        password: faker.internet.password(),
+        password: await hashPassword(faker.internet.password()),
         fullname: faker.person.fullName(),
         birthdate: faker.date.birthdate(),
         avatar_url: faker.image.avatar(),

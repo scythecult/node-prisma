@@ -1,15 +1,27 @@
 import { Router } from 'express';
-import { prisma } from '@/db/prisma';
-import { AppRoute } from '@/lib/constants/app';
-import { CommentsController } from './comments.controller';
-import { CommentsService } from './comments.service';
+import { createCommentSchema } from '@/db/schemas/comment';
+import { paramIdSchema, queryPaginationSchema } from '@/db/schemas/request';
+import { AppParams, AppRoute } from '@/lib/constants/app';
+import { commentService } from '@/lib/services/comment';
+import { authenticateUserMiddleware } from '@/middleware/authenticateUserMiddleware';
+import { validationMiddlewareBuilder } from '@/middleware/validationMiddlewareBuilder';
+import { CommentsController } from './CommentsController';
 
 const comments = Router();
 
-const commentsService = new CommentsService(prisma.comment);
-const commentsController = new CommentsController(commentsService);
+const commentsController = new CommentsController(commentService);
 
-comments.get(AppRoute.ROOT, commentsController.listComments);
-comments.post(AppRoute.ROOT, commentsController.createComment);
+comments.use(authenticateUserMiddleware);
+comments.get(
+  AppRoute.ROOT,
+  validationMiddlewareBuilder({ query: queryPaginationSchema }),
+  commentsController.listComments,
+);
+comments.post(
+  AppRoute.ROOT,
+  validationMiddlewareBuilder({ body: createCommentSchema }),
+  commentsController.createComment,
+);
+comments.delete(AppParams.ID, validationMiddlewareBuilder({ params: paramIdSchema }), commentsController.deleteComment);
 
 export { comments };

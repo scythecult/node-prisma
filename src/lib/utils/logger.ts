@@ -1,6 +1,6 @@
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import { config } from '../constants/config';
+import { config } from '../../config';
 
 const LogLevel = {
   error: 0,

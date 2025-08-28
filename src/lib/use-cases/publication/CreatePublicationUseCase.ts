@@ -1,7 +1,7 @@
 import type { Request } from 'express';
 import type { PublicationService } from '@/lib/services/publication/PublicationService';
 import type { UserService } from '@/lib/services/user/UserService';
-import type { Mailer } from '@/lib/types/ports';
+import type { IMailer } from '@/lib/types/ports';
 import { logger } from '@/lib/utils/logger';
 
 export class CreatePublicationUseCase {
@@ -11,7 +11,7 @@ export class CreatePublicationUseCase {
     protected userService: UserService,
     // Abstract mailer, could be any mailer but it should implement the Mailer interface
     // Dependency inversion
-    protected mailer: Mailer,
+    protected mailer: IMailer,
   ) {}
 
   async execute(request: Request) {

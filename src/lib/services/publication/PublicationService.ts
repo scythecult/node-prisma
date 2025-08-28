@@ -1,6 +1,9 @@
-import type { Prisma, PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
+import type { IPublication } from '@/db/types/Publication';
+import { Publication } from '@/lib/entities/Publication';
 import { EntityNotFound } from '@/lib/errors/EntityNotFound';
+import type { QueryLimit } from '@/lib/types/request';
 
 export class PublicationService {
   #db;
@@ -8,8 +11,12 @@ export class PublicationService {
   constructor(db: PrismaClient) {
     this.#db = db;
   }
-  async getAll(userId: string) {
+  async getAll(userId: string, options: QueryLimit) {
+    const { limit, offset } = options;
+
     const publications = await this.#db.publication.findMany({
+      take: limit,
+      skip: offset,
       where: { user_id: userId },
       include: { comments: true },
     });
@@ -56,7 +63,20 @@ export class PublicationService {
     return publication;
   }
 
-  async create(data: Prisma.PublicationCreateInput) {
+  async create(data: IPublication) {
     return await this.#db.publication.create({ data });
+  }
+
+  async update(id: string, data: IPublication) {
+    return await this.#db.publication.update({ where: { id }, data });
+  }
+
+  async updateLikeCount(id: string, userId: string) {
+    const publicationData = await this.getOne(id, userId);
+    const publication = new Publication(publicationData);
+
+    publication.updateLikeCount();
+
+    return await this.update(id, publication.getAsDto());
   }
 }
