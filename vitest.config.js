@@ -11,5 +11,12 @@ export default defineConfig({
   test: {
     globals: true,
     dir: './src/tests',
+    setupFiles: ['./src/tests/globalSetup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      include: ['src/**/*'],
+      exclude: ['src/tests/**/*', 'src/db/**/*', 'src/**/types/**/*'],
+    },
   },
 });

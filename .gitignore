@@ -50,5 +50,6 @@ next-env.d.ts
 # specials
 /stored
 .todo.md
+.info.md
 .readme.md
 /generated/prisma

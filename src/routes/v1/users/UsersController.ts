@@ -3,7 +3,6 @@ import { StatusCodes } from 'http-status-codes';
 import type { UserService } from '@/lib/services/user/UserService';
 import type { UserUseCase } from '@/lib/types/useCase';
 import { BaseController } from '@/lib/utils/BaseController';
-import { logger } from '@/lib/utils/logger';
 
 export class UsersController extends BaseController {
   #service;
@@ -19,12 +18,12 @@ export class UsersController extends BaseController {
     const offset = Number(request.query.offset) || this.defaultOffset;
 
     // As a example, we are logging the user ID
-    logger.debug('Requesting users');
-    logger
-      .child({
-        logMetadata: `User ${request.auth.payload.id}`,
-      })
-      .debug('is requesting users');
+    // logger.debug('Requesting users');
+    // logger
+    //   .child({
+    //     logMetadata: `User ${request.auth.payload.id}`,
+    //   })
+    //   .debug('is requesting users');
 
     const users = await this.#service.getAll({ limit, offset });
 
@@ -51,9 +50,10 @@ export class UsersController extends BaseController {
   };
 
   updateNote = async (request: Request, response: Response) => {
-    const user = await this.#service.updateNote(request.params.id, request.body);
+    const note = await this.#service.updateNote(request.params.id, request.body);
 
-    response.status(StatusCodes.OK).json(user);
+    // TODO Fix status depend on note created or updated
+    response.status(StatusCodes.OK).json(note);
   };
 
   deleteUser = async (request: Request, response: Response) => {

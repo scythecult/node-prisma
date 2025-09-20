@@ -10,6 +10,10 @@ const LogLevel = {
   debug: 4,
 } as const;
 
+export const logFormatter = ({ timestamp, level, message, logMetadata, stack }: winston.Logform.TransformableInfo) => {
+  return `${timestamp} ${level}: ${logMetadata || ''} ${message} ${stack || ''}`;
+};
+
 const logger = winston.createLogger({
   levels: LogLevel,
   level: config.logLevel,
@@ -19,9 +23,7 @@ const logger = winston.createLogger({
     winston.format.timestamp({
       format: 'YYYY-MM-DD hh:mm:ss.SSS A',
     }),
-    winston.format.printf(({ timestamp, level, message, logMetadata, stack }) => {
-      return `${timestamp} ${level}: ${logMetadata || ''} ${message} ${stack || ''}`;
-    }),
+    winston.format.printf(logFormatter),
   ),
   transports: [new winston.transports.Console()],
 });
